@@ -1,6 +1,8 @@
 """Check this skill package: frontmatter, internal links, per-section Chinese explanations.
 
-Two extra groups run only when their inputs are present locally, and are skipped with a note otherwise:
+Three groups run conditionally, and every skip is reported rather than passing silently:
+  * repo docs          — README.md, LICENSE, NOTICE.md: skipped when the tree is a skills-root
+                         install, which holds only the skill package
   * quote traceability — needs the article text at _build/article.md (or ARTICLE_PATH)
   * figure index       — needs the saved page's asset folder under _source/
 
@@ -49,9 +51,12 @@ QUOTES = [
     ("aim for a truly minimalist aesthetic that feels apple-native", ["references/deliver.md", "references/prompt-library.md"]),
 ]
 
-REQUIRED = ["SKILL.md", "README.md", "LICENSE", "NOTICE.md", "references/discover.md",
-            "references/define.md", "references/deliver.md", "references/prompt-library.md",
-            "references/sources.md", "scripts/seed_string.py"]
+CORE = ["SKILL.md", "references/discover.md", "references/define.md", "references/deliver.md",
+        "references/prompt-library.md", "references/sources.md", "scripts/seed_string.py"]
+
+# Repository docs, not part of the skill itself: a skills root holds only CORE, so there they are
+# reported as skipped rather than failed. See "Install" in README.md.
+REPO_DOCS = ["README.md", "LICENSE", "NOTICE.md"]
 
 EXPECTED_FRONTMATTER = ["name", "description", "allowed-tools"]
 LINK_RE = re.compile(r"`((?:references|scripts|_build)/[\w./-]+)`")
@@ -139,11 +144,18 @@ def main() -> int:
                 failures.append("%s: section '%s' has no Chinese explanation"
                                 % (rel, parts[i + 1].strip()))
 
-    # 4. required files
-    for rel in REQUIRED:
+    # 4. required files: the skill package must be complete; repo docs are only noted when absent
+    for rel in CORE:
         checks += 1
         if not (ROOT / rel).exists():
             failures.append("missing required file: %s" % rel)
+
+    absent_docs = [rel for rel in REPO_DOCS if not (ROOT / rel).exists()]
+    if absent_docs:
+        skipped.append("repo docs (%s — normal for a skills-root install)"
+                       % ", ".join(absent_docs))
+    else:
+        checks += len(REPO_DOCS)
 
     # 5. quote traceability (needs the article text)
     if ARTICLE.exists():

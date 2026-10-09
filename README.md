@@ -38,18 +38,42 @@ then judges the result from pictures rather than code.
 ## Install
 
 A skill is discovered from a skills root, not from wherever you cloned it. Copy `SKILL.md`,
-`references/` and `scripts/` into one of:
+`references/` and `scripts/` into `<skills-root>/ui-designer/`, where `<skills-root>` is one of:
 
 ```text
-Windows   %USERPROFILE%\.agents\skills\ui-designer
-macOS     ~/.agents/skills/ui-designer
-Claude    ~/.claude/skills/ui-designer
+User-level (every project)
+  Windows        %USERPROFILE%\.agents\skills
+  macOS / Linux  ~/.agents/skills
+  Claude Code    ~/.claude/skills
+
+Project-level (that project only)
+  any project    <project-root>/.agents/skills     # shared by tools that read .agents
+  DeepSeek DSH   <project-root>/.dsh/skills        # DSH's own project root
 ```
+
+`<project-root>` is **the nearest ancestor directory containing `.git`** — not the directory you
+happen to be in. DSH and similar harnesses fall back to the starting directory when there is no
+`.git` anywhere above it. The `.agents` or `.dsh` folder must sit in that root, so
+`<project-root>/.agents/skills/ui-designer` works and `<project-root>/ui-designer` does not.
 
 The folder name must match the `name:` in the frontmatter (`ui-designer`). Anything that reads a
 `SKILL.md` can follow it — no build step, no dependencies beyond Python 3 for the seed script.
+Skills are discovered when a session resolves its working directory, so start a new session in that
+project after installing.
 
-> 中文：skill 需要放进 agent 的 skills 根目录才会被加载；目录名要与 frontmatter 里的 `name` 一致。除种子脚本需要 Python 3 之外没有依赖，也没有构建步骤。
+```powershell
+$dest = "$env:USERPROFILE\.agents\skills\ui-designer"     # or <project-root>\.agents\skills\ui-designer
+New-Item -ItemType Directory -Force -Path $dest | Out-Null
+git clone --depth 1 https://github.com/skr-wu999/ui-designer.git $env:TEMP\ui-designer-src
+Copy-Item "$env:TEMP\ui-designer-src\*" $dest -Recurse -Force
+Remove-Item "$env:TEMP\ui-designer-src" -Recurse -Force
+```
+
+`README.md`, `LICENSE` and `NOTICE.md` are repository docs and are not needed inside the skills root
+— copy them too if you want them to travel with the skill, or leave them here on GitHub.
+`scripts/verify_skill.py` notes their absence instead of failing on it.
+
+> 中文：skill 必须放进 skills 根目录下的 `ui-designer\` 里。用户级位置是 `~\.agents\skills`（所有项目可用）；项目级位置是 **项目根**（含 `.git` 的最近祖先目录，没有 `.git` 时用会话启动目录）下的 `.agents\skills` 或 DSH 的 `.dsh\skills`。目录名要与 frontmatter 里的 `name` 一致。装好后在该项目新开会话即可生效——skill 在会话解析工作目录时被发现。`README.md`／`LICENSE`／`NOTICE.md` 属于仓库文档，不必放进 skills 根，校验器对它们的缺失只提示不报错。除种子脚本需要 Python 3 之外没有依赖，也没有构建步骤。
 
 ## Verify
 
