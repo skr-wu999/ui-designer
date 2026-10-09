@@ -1,0 +1,16 @@
+# Local source material — the article's text and images are copyrighted and must not be published.
+_source/
+_build/
+.acl-recovery/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# Local archives
+*.zip
+*.7z
