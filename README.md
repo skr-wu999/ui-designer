@@ -63,17 +63,23 @@ project after installing.
 
 ```powershell
 $dest = "$env:USERPROFILE\.agents\skills\ui-designer"     # or <project-root>\.agents\skills\ui-designer
+$src  = "$env:TEMP\ui-designer-src"
+
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
-git clone --depth 1 https://github.com/skr-wu999/ui-designer.git $env:TEMP\ui-designer-src
-Copy-Item "$env:TEMP\ui-designer-src\*" $dest -Recurse -Force
-Remove-Item "$env:TEMP\ui-designer-src" -Recurse -Force
+git clone --depth 1 https://github.com/skr-wu999/ui-designer.git $src
+
+# copy the skill only: a skills root should not carry the clone's .git, .gitignore or repo docs
+Copy-Item "$src\SKILL.md" $dest -Force
+Copy-Item "$src\references", "$src\scripts" $dest -Recurse -Force
+Remove-Item $src -Recurse -Force
 ```
 
-`README.md`, `LICENSE` and `NOTICE.md` are repository docs and are not needed inside the skills root
-— copy them too if you want them to travel with the skill, or leave them here on GitHub.
-`scripts/verify_skill.py` notes their absence instead of failing on it.
+That leaves `<skills-root>/ui-designer/` holding just `SKILL.md`, `references/` and `scripts/` —
+about 85 KB, and exactly what `scripts/verify_skill.py` calls the core package. `README.md`,
+`LICENSE` and `NOTICE.md` are repository docs and are not needed inside a skills root; copy them too
+if you want them to travel with the skill. The verifier notes their absence instead of failing on it.
 
-> 中文：skill 必须放进 skills 根目录下的 `ui-designer\` 里。用户级位置是 `~\.agents\skills`（所有项目可用）；项目级位置是 **项目根**（含 `.git` 的最近祖先目录，没有 `.git` 时用会话启动目录）下的 `.agents\skills` 或 DSH 的 `.dsh\skills`。目录名要与 frontmatter 里的 `name` 一致。装好后在该项目新开会话即可生效——skill 在会话解析工作目录时被发现。`README.md`／`LICENSE`／`NOTICE.md` 属于仓库文档，不必放进 skills 根，校验器对它们的缺失只提示不报错。除种子脚本需要 Python 3 之外没有依赖，也没有构建步骤。
+> 中文：skill 必须放进 skills 根目录下的 `ui-designer\` 里。用户级位置是 `~\.agents\skills`（所有项目可用）；项目级位置是 **项目根**（含 `.git` 的最近祖先目录，没有 `.git` 时用会话启动目录）下的 `.agents\skills` 或 DSH 的 `.dsh\skills`。只复制 `SKILL.md`、`references\`、`scripts\` 三项即可（约 85 KB），不要把 clone 出来的 `.git`、`.gitignore` 和仓库文档一起塞进 skills 根。目录名要与 frontmatter 里的 `name` 一致。装好后在该项目新开会话即可生效——skill 在会话解析工作目录时被发现。`README.md`／`LICENSE`／`NOTICE.md` 属于仓库文档，校验器对它们的缺失只提示不报错。除种子脚本需要 Python 3 之外没有依赖，也没有构建步骤。
 
 ## Verify
 
@@ -82,11 +88,12 @@ python scripts/verify_skill.py     # frontmatter, links, per-section Chinese
 python scripts/seed_string.py --count 3
 ```
 
-`verify_skill.py` also checks that quoted text really appears in the source article and that the figure
-index resolves — those two groups are skipped automatically when the article text is not present, which
-is the case in this repository (see below).
+`verify_skill.py` exits non-zero if the skill package is incomplete. Three groups are reported as
+skipped rather than passed silently when their inputs are absent: the repository docs (normal for a
+skills-root install, which holds only the core package), quote traceability against the article text,
+and the figure index. The latter two need local material this repository does not ship (see below).
 
-> 中文：`verify_skill.py` 会检查 frontmatter、内部链接与「每个小节都有中文对照」；引文可溯源与图片存在性两组检查在缺少原文时自动跳过（本仓库正是这种情况）。
+> 中文：`verify_skill.py` 在 skill 本体不完整时以非零退出。有三组检查在缺少输入时**报「跳过」而不是静默通过**：仓库文档（skills 根安装的正常情况，因为那里只放核心包）、引文可溯源、图片存在性；后两组需要本仓库不提供的本地素材（见下）。
 
 ## What this repository does not include
 
