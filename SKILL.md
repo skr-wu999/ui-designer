@@ -150,7 +150,13 @@ Goal: it holds up as a real product, not a demo.
 2. **Hunt AI tells.** ※ Sweep for the signals that read as machine-made — default palette and spacing,
    three identical cards, emoji section bullets, centered hero with two buttons, symmetry everywhere,
    stock-looking imagery, borders and radii applied uniformly, motion that only fades things in.
-   `references/deliver.md` has the checklist.
+   `references/deliver.md` has the checklist. **If the antislop family is installed, that pass is T7**:
+   load `antislop` with `antislop-ui` and run them as the sweep, which adds the purpose test, the
+   rules that allow no exception, the dose caps, the app-shaped tells, and the liveliness dials that
+   keep the result from turning sterile — and it ends with antislop's Delivery Gate. Without antislop,
+   the eight categories in `references/deliver.md` are the whole pass. Either way: removal is not the
+   goal, so re-check the direction before the sweep and report copy tells to the user instead of
+   rewriting their strings.
 3. **Get the copy from the user.** ※ Ask for the copy deck — headlines, subheads, button labels,
    microcopy, empty and error strings — and use those strings exactly. Never invent, paraphrase,
    shorten, or "improve" copy. If the user has no copy yet, stop and ask for it: writing the words is
@@ -162,7 +168,7 @@ Goal: it holds up as a real product, not a demo.
    still score ≥ 9/10. Cutting exposes new problems, so this pass is what confirms the deletions helped.
 6. **Then stop.** ※ One more round of "adding polish" is usually where restraint gets lost.
 
-> 中文：让它站得住。① 做减法：逐个数屏幕上每个元素在干什么，去掉发光、渐变、装饰性容器、重复标签和一切「解释过度」的东西（T6）。② 清 AI 味：按清单扫一遍默认配色与间距、三张一模一样的卡片、emoji 当小标题、居中大标题加两个按钮、满屏对称、素材图感、统一圆角与描边、只会淡入的动效（T7）。③ 向用户索取文案：标题、副标题、按钮、微文案、空态与错误态文案都要用户给，逐字使用，缺了就停下来问，绝不自己编（T8）。④ 在浏览器里逐帧验证：点状态、滚过渡、看空态与错误态、按真实视口看；拿不到截图就用下面的办法，且不要声称做过没做的检查。⑤ 删减之后再让独立评审只看截图评一次：删除会暴露新问题，这一轮用来确认删对了。⑥ 该停就停：再加一轮「精致化」往往正是克制失守的地方。
+> 中文：让它站得住。① 做减法：逐个数屏幕上每个元素在干什么，去掉发光、渐变、装饰性容器、重复标签和一切「解释过度」的东西（T6）。② 清 AI 味：按清单扫一遍默认配色与间距、三张一模一样的卡片、emoji 当小标题、居中大标题加两个按钮、满屏对称、素材图感、统一圆角与描边、只会淡入的动效（T7）；**装了 antislop 系列就用它来跑这一步**——`antislop` + `antislop-ui` 在此之上补了目的测试、没有例外的那一层、剂量上限、应用界面形态的 AI 味，以及防止删成「无菌默认」的活力刻度，并以它的 Delivery Gate 收口；没装则 `references/deliver.md` 的八类就是全部。两种情况都一样：**删不是目的**，扫之前先复核方向，文案里的 AI 味报告给用户而不是替用户改写。③ 向用户索取文案：标题、副标题、按钮、微文案、空态与错误态文案都要用户给，逐字使用，缺了就停下来问，绝不自己编（T8）。④ 在浏览器里逐帧验证：点状态、滚过渡、看空态与错误态、按真实视口看；拿不到截图就用下面的办法，且不要声称做过没做的检查。⑤ 删减之后再让独立评审只看截图评一次：删除会暴露新问题，这一轮用来确认删对了。⑥ 该停就停：再加一轮「精致化」往往正是克制失守的地方。
 
 ## Technique index / 技法索引
 
@@ -174,14 +180,17 @@ Goal: it holds up as a real product, not a demo.
 | T4 | Image generation to enrich the design | `references/define.md` |
 | T5 | Video generation for motion and transitions | `references/define.md` |
 | T6 | Cut out elements that don't add value | `references/deliver.md` |
-| T7 | Remove AI tells | `references/deliver.md` |
+| T7 | Remove AI tells | `references/deliver.md`; the `antislop` + `antislop-ui` skills when installed |
 | T8 | Write the copy on the site yourself | `references/deliver.md` |
 
 Ready-to-adapt prompts, including the verbatim ones from the source article: `references/prompt-library.md`.
-If the `antislop` skill family is installed, load `antislop` with `antislop-ui` for a deeper rule set on
-the same failure mode; this skill is the process, antislop is the taste filter.
+The `antislop` family is optional: this skill is the process, antislop is the taste filter. It is worth
+loading for T7 (remove AI tells) and whenever the design decisions themselves need defending, because it
+supplies the purpose test, the rules that allow no exception, the dose caps, and the liveliness dials that
+keep a swept design from becoming sterile. `references/deliver.md` says exactly what it adds and how to
+run it as part of T7.
 
-> 中文：技法索引与出处见上表；可直接改用的提示词（含原文逐字提示词）在 `references/prompt-library.md`。本机若装有 antislop 系列，配合 `antislop` + `antislop-ui` 使用：本 skill 管流程，antislop 管品味过滤。
+> 中文：技法索引与出处见上表；可直接改用的提示词（含原文逐字提示词）在 `references/prompt-library.md`。antislop 系列是**可选**依赖：本 skill 管流程，antislop 管品味过滤。建议在 T7（清 AI 味）以及任何需要为设计决策辩护的时候加载它——它提供目的测试、没有例外的那一层、剂量上限，以及防止清理之后变成「无菌默认」的活力刻度；它到底补了什么、如何在 T7 里配合使用，`references/deliver.md` 写得很具体。
 
 ## Getting a screenshot / 怎么拿到截图
 
@@ -204,13 +213,15 @@ Stages 2 and 3 are judged from pictures, so the first task is always to obtain o
 - [ ] A critic in a fresh context, seeing only the screenshot, scored it ≥ 9/10 with the same prompt
       used every iteration. ※ Twice.
 - [ ] Every element on screen has a job. Anything that only decorates or explains was cut or justified.
-- [ ] ※ No remaining AI tells from the checklist in `references/deliver.md`.
+- [ ] ※ No remaining AI tells from the checklist in `references/deliver.md`. ※ If `antislop` is
+      installed, its Delivery Gate was run on the visual result and reported item by item, and the
+      design was checked for the opposite failure too: it is not sterile.
 - [ ] ※ The copy on the page came from the user's copy deck, unchanged, not generated.
 - [ ] Verified in a browser: real viewport, real interactions, transitions scrubbed. ※ States checked,
       and if no capture was possible, that limitation is reported rather than glossed over.
 - [ ] ※ The user can say what it is for, and the design serves that.
 
-> 中文：完成前逐条核对——只看截图就能辨认出这个方向（不是模型默认输出）；新上下文的评审只用截图、每次同一提示词、独立给出 ≥9/10（连两次）；屏上每个元素都有职责；AI 味清单已清；页面上文案来自用户提供的清单、逐字未改；在浏览器按真实视口与真实交互验证过（含各种状态；若无法截图，如实说明限制而不是含糊过去）；它能说清「这是给谁、为什么」，且设计服务于这个目的。
+> 中文：完成前逐条核对——只看截图就能辨认出这个方向（不是模型默认输出）；新上下文的评审只用截图、每次同一提示词、独立给出 ≥9/10（连两次）；屏上每个元素都有职责；AI 味清单已清（装了 antislop 的话，其 Delivery Gate 已对视觉结果逐条跑过并报出，同时也检查了相反方向的失败——结果不是「无菌默认」）；页面上文案来自用户提供的清单、逐字未改；在浏览器按真实视口与真实交互验证过（含各种状态；若无法截图，如实说明限制而不是含糊过去）；它能说清「这是给谁、为什么」，且设计服务于这个目的。
 
 ## Source / 来源
 

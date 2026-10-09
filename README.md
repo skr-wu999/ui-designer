@@ -29,11 +29,27 @@ then judges the result from pictures rather than code.
 | [SKILL.md](SKILL.md) | The skill itself — triggers, three stages, operating rules, screenshot workflow, checklists |
 | [references/discover.md](references/discover.md) | Stage 1: seed strings, ambitious prompts, the three-step ideation system |
 | [references/define.md](references/define.md) | Stage 2: the design-critic loop, image generation, video generation |
-| [references/deliver.md](references/deliver.md) | Stage 3: subtraction, AI-tell sweep, obtaining the copy |
+| [references/deliver.md](references/deliver.md) | Stage 3: subtraction, AI-tell sweep (antislop-backed when that family is installed), obtaining the copy |
 | [references/prompt-library.md](references/prompt-library.md) | Every prompt, ready to copy — quoted ones marked **source** |
 | [references/sources.md](references/sources.md) | Provenance: what is verbatim, what is a reader's summary, what this skill added |
 | [scripts/seed_string.py](scripts/seed_string.py) | Generates seed strings for Technique 1 |
 | [scripts/verify_skill.py](scripts/verify_skill.py) | Checks the package: frontmatter, links, per-section Chinese |
+
+## Optional companion: antislop
+
+Technique 7 (remove AI tells) defers to the third-party
+[`antislop`](https://github.com/miqdadbadjuber/anti-slop) family when it is installed: load `antislop`
+with `antislop-ui` and run them as the sweep. What they add is recorded in
+[references/deliver.md](references/deliver.md), checked against `antislop` 3.2.20 — the purpose test,
+the rules that allow no exception (the em-dash and accessibility tier), the dose caps, the app-shaped
+tells, and the liveliness dials that stop over-filtering from producing a sterile result.
+
+Nothing here requires it. With no antislop installed, the eight tell categories in
+[references/deliver.md](references/deliver.md) are the whole pass. The two sets also do not fight over
+the copy: whenever the copy carries a tell, both say to report it to the user rather than silently
+rewrite a string the user owns (Technique 8).
+
+> 中文：T7（清 AI 味）在本机装有第三方 [`antislop`](https://github.com/miqdadbadjuber/anti-slop) 系列时以它为准：调 `antislop` + `antislop-ui` 来跑这一步。它补了什么记在 `references/deliver.md` 里（对照的是 antislop 3.2.20）——目的测试、没有例外的那一层（破折号与无障碍）、剂量上限、应用界面形态的 AI 味，以及防止「过滤过头变成无菌默认」的活力刻度。没有它也能跑：不装时 `references/deliver.md` 的八类就是全部。两者在文案上也不冲突——凡是用户提供的文案里发现 AI 味，两边都要求**报告**而不是擅自改写（T8）。
 
 ## Install
 

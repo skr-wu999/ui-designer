@@ -223,6 +223,25 @@ Keep deliberate exceptions: if a choice is intentional and defensible, say so an
 
 > 中文：※ T7 正文在付费墙后，本提示词是本 skill 对该思路的具体化：让 agent 只挑「像 AI 生成」的证据，逐类别过一遍，每条都要给出「相反的具体决策」再重渲染，并保留能说清理由的刻意例外。
 
+### 9b. Same pass, with antislop installed — template
+
+※ Use this instead of 9 when the `antislop` family is available. It widens the categories to antislop's
+catalog, keeps the two questions that make its filter work, names the direction the pass is judged
+against, and closes with the gate rather than an impression.
+
+```
+Load the antislop core and antislop-ui and run them as the AI-tell sweep on this design.
+Judge against this direction: {DESIGN DIRECTION / the Stage 2 brief}. Its dials are ENERGY {1-3} /
+RHYTHM {1-3} / MOTION {1-3}; flag anything that contradicts them.
+For each tell: name it, cite the rule, say what it serves (or that nothing is served), and state the
+concrete opposite decision you are applying. Write one line of reason for every decision that survives.
+Report copy tells (em dash, buzzwords, numbers nobody supplied) to me instead of rewriting my strings.
+Then answer: if the logo and product name were swapped, would this still feel unique?
+Finish with the Delivery Gate as a PASS/FAIL list, one line per item, every PASS backed by evidence.
+```
+
+> 中文：※ 装了 antislop 时改用本条替代第 9 条：类别改用 antislop 的完整目录，保留让它的过滤器真正起作用的两个问题（「它服务于什么」「换掉 logo 还独特吗」），把本阶段的方向与三个刻度作为评判基准写进提示词（方向与刻度对抗的内容要标出来），每条 AI 味都要引用规则号并给出相反的明确决策，留下的决定各写一行理由；文案上的 AI 味（破折号、空泛词、没人给过的数字）报告给用户而不是替其改写；最后按 Delivery Gate 逐条给出 PASS／FAIL，每个 PASS 附证据。
+
 ## 10. Copy ownership (Deliver, T8) — template
 
 ※ T8 is a reader's summary of a paywalled section; this is how an agent should act on it: obtain the
