@@ -221,8 +221,7 @@ are loosely inspired by the [Double Diamond](https://en.wikipedia.org/wiki/Doubl
 adapted for a team of AI agents.
 
 Coverage and gaps — which parts are verbatim, which came from a reader's summary, and which are this
-skill's additions — are documented in `references/sources.md`, along with an index of the article's
-figures and what each one shows (the images themselves belong to the author and are not redistributed
-here). Read it before attributing anything here to the original author.
+skill's additions — are documented in `references/sources.md`, which also indexes the article's figures
+and says what each one shows. Read it before attributing anything here to the original author.
 
-> 中文：本 skill 的方法论、技法与逐字提示词出自 **Anshu Chimala**（在 Apple 负责设计与研发团队 12 年）的文章《How to turn your AI into a world-class designer》，发表于 Lenny's Newsletter；三阶段框架受 Double Diamond 启发并改造为面向 AI 智能体团队。哪些是原文、哪些来自读者口述摘要、哪些是本 skill 的补充，以及原文图片的索引与说明（图属于作者，本仓库不再分发）都记在 `references/sources.md` 里。
+> 中文：本 skill 的方法论、技法与逐字提示词出自 **Anshu Chimala**（在 Apple 负责设计与研发团队 12 年）的文章《How to turn your AI into a world-class designer》，发表于 Lenny's Newsletter；三阶段框架受 Double Diamond 启发并改造为面向 AI 智能体团队。哪些是原文、哪些来自读者口述摘要、哪些是本 skill 的补充，以及原文图片的索引与说明，都记在 `references/sources.md` 里。
